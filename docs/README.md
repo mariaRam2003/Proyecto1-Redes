@@ -8,7 +8,7 @@ This project involves the implementation of an instant messaging client supporti
 
 ### Account Management (To be implemented)
 - **Register a new account**: Users can create a new account on the XMPP server.
-- **Login**: Users can log in to their accounts.
+- **xmppclient.account.Login**: Users can log in to their accounts.
 - **Logout**: Users can log out of their accounts.
 - **Delete account**: Users can delete their accounts from the server.
 
@@ -53,7 +53,7 @@ Use your IDE or build tool to run the application.
 1. Open the application.
 2. Enter your credentials and click "Log In."
 
-### Close Session
+### Logout
 *Note: Steps will be defined later*
 
 ### Delete Account
