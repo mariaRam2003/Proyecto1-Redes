@@ -27,7 +27,7 @@ This project involves the implementation of an instant messaging client supporti
 ### Prerequisites
 
 - **Java Development Kit (JDK) 11 or later** (if using Java)
-- **XMPP Server**: Use the server provided at `alumchat.lol`. (go to format/regexp for more information on how to use the server correctly)
+- **XMPP Server**: Use the server provided at `alumchat.lol`. (go to `Server Guidelines` for more information on how to use the server correctly)
 - **XMPP Client Library**: [Smack](https://www.igniterealtime.org/projects/smack/) for Java.
 
 ### Installation
@@ -42,6 +42,25 @@ Ensure the required dependencies are included in your build configuration (e.g.,
 
 3. **Run the application**:
 Use your IDE or build tool to run the application.
+
+## Usage
+### Register a New Account
+1. Open the application.
+2. Select "Register" and fill in the required details.
+3. Follow the on-screen instructions to complete registration.
+
+### Log In
+1. Open the application.
+2. Enter your credentials and click "Log In."
+
+### Close Session
+*Note: Steps will be defined later*
+
+### Delete Account
+*Note: Steps will be defined later*
+
+### Chat
+*Note: Steps will be defined later*
 
 ## Server Guidelines
 To maintain a standardized and secure environment, please follow these guidelines when creating users on the XMPP server at alumchat.lol:
@@ -62,3 +81,6 @@ To maintain a standardized and secure environment, please follow these guideline
 - Prevent the creation of generic usernames that could lead to issues or misuse.
 - Ensure that all users are affiliated with UVG and prevent external intruders.
 - Any user not adhering to these conventions may be subject to removal without prior notice.
+
+## Contact
+For any inquiries, please contact Maria Marta Ramirez at [gilmariaramrz@gmail.com](gilmariaramrz@gmail.com).
