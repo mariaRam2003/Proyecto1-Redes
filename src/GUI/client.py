@@ -21,3 +21,4 @@ class Client(slixmpp.ClientXMPP):
     def failed_auth(self, event):
         print("Autenticación fallida. Verifica tu JID y contraseña.")
         self.disconnect()
+        
