@@ -23,7 +23,7 @@ class BasicClient(ClientXMPP):
             selected_option = input("Seleccione una opción para continuar: ")
 
             if selected_option == "1":
-                print("Not implemented yet sorry :).")
+                await self.show_all_contacts()
             elif selected_option == "2":
                 print("Not implemented yet sorry:)")
             elif selected_option == "3":
@@ -42,6 +42,37 @@ class BasicClient(ClientXMPP):
                 self.is_user_connected = False
             else:
                 print("Opción no válida. Por favor seleccione una opción del 1 al 8.")
+
+    async def show_all_contacts(self):
+        # Obtener la lista de contactos del roster
+        roster = self.client_roster
+
+        # Verificar si hay contactos
+        if not roster:
+            print("No hay contactos para mostrar :()")
+            return
+
+        # Iterar sobre los contactos en el roster
+        for contact in roster.keys():
+            if contact == self.boundjid.bare:
+                continue
+            
+            print("\nEstos son los contactos en tu agenda:")
+            print(f"\nJID del contacto: {contact}")
+
+            # Valores predeterminados
+            presence_value = "Offline"
+            status = "None"
+
+            # Iterar sobre la información de presencia del contacto (si está disponible)
+            for _, presence in roster.presence(contact).items():
+                presence_value = presence["show"] or "Offline"
+                status = presence["status"] or "None"
+
+            # Mostrar información del contacto
+            print(f"Presencia del contacto: {presence_value}")
+            print(f"Estado del contacto: {status}\n")
+
 
     # (ATTENTION) TO BE TESTED LATER (PUEDE QUE FUNCIONE)
     async def send_contact_request(self):
@@ -71,6 +102,7 @@ class BasicClient(ClientXMPP):
         }.get(status, "chat")
         description = input("Ingrese su mensaje de descripción: ")
         self.send_presence(pshow=presence, pstatus=description)
+        print("Tu status ha sido cambiado con éxito !.")
         await self.get_roster()
 
     def message(self, msg):
