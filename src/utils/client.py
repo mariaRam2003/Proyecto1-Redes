@@ -1,6 +1,7 @@
 import asyncio
 import aioconsole
 from aioconsole import ainput
+import slixmpp
 from slixmpp import ClientXMPP
 import os
 import base64
@@ -309,3 +310,31 @@ class BasicClient(ClientXMPP):
                     print(f"Error al procesar el archivo recibido: {e}")
             else:
                 print(f"Mensaje recibido de {msg['from']}: {message_body}")
+
+'''
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+CLASS para eliminar un usuario (SE PROBO IMPLEMENTAR PERO NO FUNCIONA AUN)
+probar con:
+- cambiar la clase a una funcion
+- hacer uso de un archivo separado
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+'''
+class DeleteClient(slixmpp.ClientXMPP):
+    def __init__(self, jid, password):
+        super().__init__(jid, password)
+        self.register_plugin('xep_0030') # Service Discovery
+        self.register_plugin('xep_0199') # XMPP Ping
+
+    async def start(self, event):
+        self.send_presence(pshow="chat", pstatus="Desconectado")
+        await self.get_roster()
+
+    async def register(self, event):
+        await self.register_user()
+        print(f"Cuenta {self.boundjid} eliminada exitosamente.")
+
+    async def register_user(self):
+        self.send_presence_subscription(self.boundjid.bare, "unsubscribed")
+        print("Solicitud de eliminación de cuenta enviada.")

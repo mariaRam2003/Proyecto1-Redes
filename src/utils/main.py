@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from client import BasicClient
+from client import BasicClient, DeleteClient
 
 if __name__ == "__main__":
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
@@ -30,11 +30,6 @@ if __name__ == "__main__":
 
         elif selected_option == "3":
             print("Not implemented yet :(.")
-            # jid = input("\nPor favor, ingrese el JID a eliminar: ")
-            # password = input("Ingrese la contraseña de ese JID: ")
-            # xmpp_delete = DeleteAccount(jid, password)
-            # xmpp_delete.connect(disable_starttls=True, use_ssl=False)
-            # xmpp_delete.process(forever=False)
 
         elif selected_option == "4":
             print("\nSaliendo\n")
