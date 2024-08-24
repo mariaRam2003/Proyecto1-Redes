@@ -1,8 +1,9 @@
 import asyncio
-import logging
 import aioconsole
 from aioconsole import ainput
 from slixmpp import ClientXMPP
+import os
+import base64
 
 class BasicClient(ClientXMPP):
     def __init__(self, jid, password):
@@ -19,6 +20,7 @@ class BasicClient(ClientXMPP):
         self.register_plugin("xep_0060") # PubSub
         self.register_plugin("xep_0199") # XMPP Ping
         self.register_plugin("xep_0045") # Multi-User Chat
+        self.register_plugin("xep_0065")  # SOCKS5 Bytestreams (para enviar archivos)
 
     async def session_start(self, event):
         self.send_presence()
@@ -46,7 +48,7 @@ class BasicClient(ClientXMPP):
             elif selected_option == "6":
                 await self.update_presence()
             elif selected_option == "7":
-                print("Not implemented yet sorry:)")
+                await self.send_file()
             elif selected_option == "8":
                 self.disconnect()
                 self.is_user_connected = False
@@ -248,11 +250,62 @@ class BasicClient(ClientXMPP):
 
     '''
     --------------------------------------------------------------------------------------------
-    OPCION 7 (NO IMPLEMENTADO)
+    OPCION 7 (IMPLEMENTADO PERO NO FUNCIONA AUN)
     Enviar un mensaje con un archivo
     --------------------------------------------------------------------------------------------
     '''
+    async def send_file(self):
+        recipient_jid = input("Ingrese el JID del usuario para enviar un archivo: ")
+        file_path = input("Ingrese la ruta del archivo a enviar: ")
+
+        # Normalizar el path del archivo
+        file_path = os.path.normpath(file_path) # cambiar a os.path.abspath(file_path) si no funciona
+
+        if not os.path.isfile(file_path):
+            print("Archivo no encontrado. Verifique la ruta e intente nuevamente.")
+            return
+
+        file_name = os.path.basename(file_path)
+        file_size = os.path.getsize(file_path)
+
+        try:
+            with open(file_path, "rb") as file:
+                file_data = file.read()
+
+            # Codificar el archivo en base64
+            encoded_file = base64.b64encode(file_data).decode('utf-8')
+            message_body = f"Archivo recibido: {file_name}\n{encoded_file}"
+
+            # Enviar el mensaje con el contenido codificado
+            self.send_message(
+                mto=recipient_jid,
+                mbody=message_body,
+                mtype="chat"
+            )
+            print("Archivo enviado con éxito.")
+        except Exception as e:
+            print(f"Ocurrió un error al enviar el archivo: {e}")
+
 
     def message(self, msg):
         if msg["type"] in ("chat", "normal"):
-            print(f"Mensaje recibido de {msg['from']}: {msg['body']}")
+            message_body = msg["body"]
+            
+            # Verificar si el mensaje contiene un archivo codificado
+            if "\n" in message_body:
+                parts = message_body.split("\n", 1)
+                file_info = parts[0]  # Información del archivo
+                encoded_file_data = parts[1]  # Datos del archivo codificados
+
+                try:
+                    decoded_file_data = base64.b64decode(encoded_file_data)
+                    file_name = file_info.replace("Archivo recibido: ", "").strip()
+                    
+                    with open(file_name, "wb") as file:
+                        file.write(decoded_file_data)
+                    
+                    print(f"\n<!> Archivo recibido de {msg['from']}. Guardado como {file_name}.\n")
+                except Exception as e:
+                    print(f"Error al procesar el archivo recibido: {e}")
+            else:
+                print(f"Mensaje recibido de {msg['from']}: {message_body}")

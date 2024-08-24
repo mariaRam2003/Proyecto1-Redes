@@ -1,8 +1,6 @@
 import asyncio
 import logging
 from client import BasicClient
-from registration import register_new_user
-from delete import DeleteAccount
 
 if __name__ == "__main__":
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
@@ -16,11 +14,12 @@ if __name__ == "__main__":
         selected_option = input("Seleccione una opción para continuar: ")
 
         if selected_option == "1":
-            jid = input("\nPor favor, ingrese su nuevo JID: ")
-            password = input("Ingrese su nueva contraseña: ")
-            status = register_new_user(jid, password)
-            status_message = "\n¡Registro exitoso!\n" if status else "\nError en el registro. Intente nuevamente.\n"
-            print(status_message)
+            print("Not implemented yet :(.")
+            # jid = input("\nPor favor, ingrese su nuevo JID: ")
+            # password = input("Ingrese su nueva contraseña: ")
+            # status = register_new_user(jid, password)
+            # status_message = "\n¡Registro exitoso!\n" if status else "\nError en el registro. Intente nuevamente.\n"
+            # print(status_message)
 
         elif selected_option == "2":
             jid = input("\nPor favor, ingrese su JID: ")
@@ -30,11 +29,12 @@ if __name__ == "__main__":
             xmpp_client.process(forever=False)
 
         elif selected_option == "3":
-            jid = input("\nPor favor, ingrese el JID a eliminar: ")
-            password = input("Ingrese la contraseña de ese JID: ")
-            xmpp_delete = DeleteAccount(jid, password)
-            xmpp_delete.connect(disable_starttls=True, use_ssl=False)
-            xmpp_delete.process(forever=False)
+            print("Not implemented yet :(.")
+            # jid = input("\nPor favor, ingrese el JID a eliminar: ")
+            # password = input("Ingrese la contraseña de ese JID: ")
+            # xmpp_delete = DeleteAccount(jid, password)
+            # xmpp_delete.connect(disable_starttls=True, use_ssl=False)
+            # xmpp_delete.process(forever=False)
 
         elif selected_option == "4":
             print("\nSaliendo\n")
