@@ -25,7 +25,7 @@ class BasicClient(ClientXMPP):
             if selected_option == "1":
                 await self.show_all_contacts()
             elif selected_option == "2":
-                print("Not implemented yet sorry:)")
+                await self.show_contact_info()
             elif selected_option == "3":
                 print("Not tested yet sorry:)")
                 # await self.send_contact_request()
@@ -73,6 +73,25 @@ class BasicClient(ClientXMPP):
             print(f"Presencia del contacto: {presence_value}")
             print(f"Estado del contacto: {status}\n")
 
+    async def show_contact_info(self):
+        contact_jid = input("Ingresa el JID del contacto para ver su información: ")
+        roster = self.client_roster
+
+        # Verificar si el contacto está en el roster (si esta entre sus contactos)
+        if contact_jid not in roster:
+            print("El contacto no está en su lista de contactos.")
+            return
+
+        print(f"\nDetalles del contacto {contact_jid}:")
+        presence_value = "Offline"
+        status = "None"
+
+        for _, presence in roster.presence(contact_jid).items():
+            presence_value = presence["show"] or "Offline"
+            status = presence["status"] or "None"
+
+        print(f"Presencia del contacto: {presence_value}")
+        print(f"Estado del contacto: {status}\n")
 
     # (ATTENTION) TO BE TESTED LATER (PUEDE QUE FUNCIONE)
     async def send_contact_request(self):
