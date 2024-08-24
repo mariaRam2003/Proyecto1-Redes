@@ -11,7 +11,7 @@ if __name__ == "__main__":
     print("\n--- Bienvenido a XMPP Chat ---\n")
     selected_option = ""
 
-    while selected_option != "3":
+    while selected_option != "4":
         print("\nOpciones del Menú Principal:\n1. Registrarse\n2. Iniciar sesión\n3. Eliminar cuenta\n4. Salir\n")
         selected_option = input("Seleccione una opción para continuar: ")
 
