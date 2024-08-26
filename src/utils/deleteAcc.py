@@ -13,6 +13,7 @@ class DeleteClient(slixmpp.ClientXMPP):
     async def start(self, event):
         await self._setup_client()
         await self._perform_deletion()
+        self.disconnect()
 
     async def _setup_client(self):
         self.send_presence(pshow="chat", pstatus="Desconectado")

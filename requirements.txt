@@ -1,0 +1,4 @@
+slixmpp==1.7.0
+aioconsole==0.4.1
+dnspython==2.2.1
+tk==0.1.0

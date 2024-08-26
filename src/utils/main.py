@@ -29,7 +29,7 @@ if __name__ == "__main__":
             xmpp_client.process(forever=False)
 
         elif selected_option == "3":
-            jid = input("\nPorfavor, ingrese el JID de la cuenta que desea eliminar: ")
+            jid = input("\nPor favor, ingrese el JID de la cuenta que desea eliminar: ")
             password = input("Ingrese la contraseña de la cuenta: ")
             delete_client = DeleteClient(jid, password)
             delete_client.connect(disable_starttls=True, use_ssl=False)

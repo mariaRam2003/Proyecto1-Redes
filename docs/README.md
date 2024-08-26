@@ -4,44 +4,72 @@
 
 This project involves the implementation of an instant messaging client supporting the XMPP (eXtensible Messaging and Presence Protocol). The client will enable users to register, log in, manage contacts, and communicate via messages, both one-on-one and in groups. (Changes can be made later).
 
-## Features (at the moment)
+## Installation
 
-### Account Management (To be implemented)
+To run this project, it is recommended to use a virtual environment (e.g., Miniconda used in this project) to manage dependencies. Below are the installation steps:
+
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/mariaRam2003/Proyecto1-Redes
+    cd <project-name>
+    ```
+
+2. **Create a virtual environment** (optional but recommended):
+    ```bash
+    conda create -n xmppCHAT_env python=3.10
+    conda activate xmppCHAT_env
+    ```
+
+3. **Install the required dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Run the XMPP client**:
+    ```bash
+    python src/utils/main.py
+    ```
+
+## Features
+
+### Account Management
 - **Register a new account**: Users can create a new account on the XMPP server.
 - **xmppclient.account.Login**: Users can log in to their accounts.
 - **Logout**: Users can log out of their accounts.
 - **Delete account**: Users can delete their accounts from the server.
+- **Exit**: Closes the client.
 
-### Communication (To be implemented)
-- **View all users/contacts and their status**
-- **Add a user to contacts**
-- **View contact details**
-- **One-on-one communication**
-- **Group conversations**
-- **Set presence message**
-- **Send/receive notifications**
-- **Send/receive files**
+### Core Functionalities
+
+- **Show Contacts**: Displays all contacts in your roster.
+- **Show Contact Information**: Provides presence and status details of a specific contact.
+- **Send Contact Request**: Sends a friend request to another user.
+- **Send Direct Message**: Sends a private message to another user.
+- **Send Group Message**: Creates, joins, or sends messages in a group.
+- **Update Presence**: Changes your presence status (e.g., available, away, busy).
+- **Send File**: Sends attached files in a message (not fully functional).
+
+## Future Improvements
+
+- **Complete File Transfer Implementation**: The file sending feature is not fully functional. Future improvements include implementing the ability to send and receive files seamlessly, with proper error handling and notifications for successful transfers.
+  
+- **Notification System**: Implement a notification system that alerts users of new messages, contact requests, and other events even when the application window is not focused.
+
+- **Graphical User Interface (GUI)**: Complete the implementation of the graphical user interface using `Tkinter`. This includes refining the chat window design and integrating all functionalities into the GUI for a more user-friendly experience. There is a another branch with a little bit of help to get started.
+
+- **Account Deletion**: Finalize and fully test the account deletion functionality to ensure it works reliably across different servers.
+
+## Known Issues
+
+- **Account Deletion**: The account deletion functionality has not been fully tested and may not work as expected.
+- **File Sending**: The file sending option is not fully functional and needs more testing and adjustments.
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Java Development Kit (JDK) 11 or later** (if using Java)
 - **XMPP Server**: Use the server provided at `alumchat.lol`. (go to `Server Guidelines` for more information on how to use the server correctly)
-- **XMPP Client Library**: [Smack](https://www.igniterealtime.org/projects/smack/) for Java.
 
-### Installation
-
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd <repository-directory>
-
-2. **Set up the project**:
-Ensure the required dependencies are included in your build configuration (e.g., Maven, Gradle).
-
-3. **Run the application**:
-Use your IDE or build tool to run the application.
 
 ## Usage
 ### Register a New Account
@@ -53,15 +81,6 @@ Use your IDE or build tool to run the application.
 1. Open the application.
 2. Enter your credentials and click "Log In."
 
-### Logout
-*Note: Steps will be defined later*
-
-### Delete Account
-*Note: Steps will be defined later*
-
-### Chat
-*Note: Steps will be defined later*
-
 ## Server Guidelines
 To maintain a standardized and secure environment, please follow these guidelines when creating users on the XMPP server at alumchat.lol:
 
@@ -69,8 +88,8 @@ To maintain a standardized and secure environment, please follow these guideline
 <your UVG email before the @>[-,a-Z,0-9]?@alumchat.lol
 
 2. **Examples of valid usernames**:
-- ram21342@alumchat.lol
-- ram21342-test@alumchat.lol
+- <uvgEmail>@alumchat.lol
+- <uvgEmail>-test@alumchat.lol
 
 3. **Examples of invalid usernames (except for testing purposes)**:
 - prueba@alumchat.lol
