@@ -1,9 +1,10 @@
 import asyncio
 import logging
-from client import BasicClient, DeleteClient
+from client import BasicClient
+from deleteAcc import DeleteClient
 
 if __name__ == "__main__":
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) # Fix for Windows (NO QUITARLO)
     logging.basicConfig(level=logging.INFO)
 
     print("\n--- Bienvenido a XMPP Chat ---\n")
@@ -28,7 +29,11 @@ if __name__ == "__main__":
             xmpp_client.process(forever=False)
 
         elif selected_option == "3":
-            print("Not implemented yet :(.")
+            jid = input("\nPorfavor, ingrese el JID de la cuenta que desea eliminar: ")
+            password = input("Ingrese la contraseña de la cuenta: ")
+            delete_client = DeleteClient(jid, password)
+            delete_client.connect(disable_starttls=True, use_ssl=False)
+            delete_client.process(forever=False)
 
         elif selected_option == "4":
             print("\nSaliendo\n")
