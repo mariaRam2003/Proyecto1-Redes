@@ -3,6 +3,7 @@ import aioconsole
 from aioconsole import ainput
 import slixmpp
 from slixmpp import ClientXMPP
+import xmpp
 import os
 import base64
 
@@ -29,6 +30,26 @@ class BasicClient(ClientXMPP):
         print("Conectado exitosamente.")
         self.is_user_connected = True
         asyncio.create_task(self.process_menu())
+
+    # REGISTRAR NUEVO USUARIO
+    def register_client(jid, password):
+        # Crear un cliente XMPP con las credenciales dadas
+        registration_client = ClientXMPP(jid, password)
+        registration_client.register_plugin("xep_0077") # In-Band Registration
+
+        # Conectar al servidor
+        xmppJID = xmpp.JID(jid)
+        xmppClient = xmpp.Client(xmppJID.getDomain(), debug=[])
+        xmppClient.connect()
+
+        # Realizar el registro del usuario
+        xmppRegistration = xmpp.features.register(
+            xmppClient,
+            xmppJID.getDomain(),
+            {"username": xmppJID.getNode(), "password": password}
+        )
+
+        return bool(xmppRegistration)
 
     async def process_menu(self):
         while self.is_user_connected:

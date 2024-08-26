@@ -14,12 +14,11 @@ if __name__ == "__main__":
         selected_option = input("Seleccione una opción para continuar: ")
 
         if selected_option == "1":
-            print("Not implemented yet :(.")
-            # jid = input("\nPor favor, ingrese su nuevo JID: ")
-            # password = input("Ingrese su nueva contraseña: ")
-            # status = register_new_user(jid, password)
-            # status_message = "\n¡Registro exitoso!\n" if status else "\nError en el registro. Intente nuevamente.\n"
-            # print(status_message)
+            jid = input("\nPor favor, ingrese su JID: ")
+            password = input("Ingrese su contraseña: ")
+            registration = BasicClient.register_client(jid, password)
+            registration_msg = "Registro exitoso!!" if registration else "Error en el registro"
+            print(f"\n{registration_msg}")
 
         elif selected_option == "2":
             jid = input("\nPor favor, ingrese su JID: ")
