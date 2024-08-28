@@ -61,8 +61,7 @@ class BasicClient(ClientXMPP):
             elif selected_option == "2":
                 await self.show_contact_info()
             elif selected_option == "3":
-                print("Not tested yet sorry:)")
-                # await self.send_contact_request()
+                await self.send_contact_request()
             elif selected_option == "4":
                 await self.send_dm()
             elif selected_option == "5":
@@ -145,7 +144,6 @@ class BasicClient(ClientXMPP):
     Enviar Solicitud de Contacto
     --------------------------------------------------------------------------------------------
     '''
-    # (ATTENTION) TO BE TESTED LATER (PUEDE QUE FUNCIONE)
     async def send_contact_request(self):
         contact_jid = input("Ingrese el JID del contacto a solicitar: ")
         self.send_presence_subscription(contact_jid)
